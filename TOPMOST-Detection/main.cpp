@@ -7,15 +7,15 @@
 
 typedef struct {
 	HWND hwnd;
-	std::wstring name;
+	std::string name;
 } WindowInfo;
 static std::vector<WindowInfo> windowList;
 
 static BOOL CALLBACK enumWindowCallback(HWND hwnd, LPARAM lparam) {
 	int length = GetWindowTextLength(hwnd);
-	WCHAR* buffer = new WCHAR[length + 1];
-	GetWindowTextW(hwnd, buffer, length + 1);
-	std::wstring windowTitle(buffer);
+	CHAR* buffer = new CHAR[length + 1];
+	GetWindowTextA(hwnd, buffer, length + 1);
+	std::string windowTitle(buffer);
 	delete[] buffer;
 
 	if (length != 0)
@@ -47,10 +47,11 @@ void main() {
 		//Since WS_EX_TOPMOST is is set at bit 0b1000 and we using flags, TOP_BIT_MASK is not necessary
 		if (flags & TOPMOST_BIT_MASK || flags & TOP_BIT_MASK) {
 			if (IsWindowVisible(item.hwnd)) {
-				std::wcout << "Found a TOP-MOST window 2 " << item.name << std::endl;
+				std::cout << "Found a TOP-MOST window 2 " << item.name << std::endl;
 			}
 
 
 		}
 	}
+	while(1){}
 }
