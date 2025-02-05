@@ -44,7 +44,7 @@ void main() {
 		LONG flags = GetWindowLongA(item.hwnd, GWL_EXSTYLE); // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlonga we want to detect topmost so GWL_EXSTYLE is fitting.
 
 		//Since WS_EX_TOPMOST is is set at bit 0b1000 and we using flags, TOP_BIT_MASK is not necessary
-		if (flags & TOPMOST_BIT_MASK || flags & TOP_BIT_MASK) {
+		if (flags & TOPMOST_BIT_MASK) {
 			if (IsWindowVisible(item.hwnd)) {
 				std::cout << "Found a TOP-MOST window 2 " << item.name << std::endl;
 			}
